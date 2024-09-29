@@ -30,12 +30,12 @@ class Tank:
 
     def backvard(self):
         if self.fuel > 0:
-            self.y += -1
+            self.y -= -1
             self.fuel -= 1
 
     def left(self):
         if self.fuel > 0:
-            self.x += -1
+            self.x -= -1
             self.fuel -= 1
 
     def right(self):
