@@ -22,6 +22,8 @@ class Tank:
         self.__canvas = canvas
         self.__model = model # модель
         self.__hp = 100 # здоровье
+        #self.__dx = 0
+        #self.__dy = 0
         self.__xp = 0 # опыт
         self.__ammo = ammo # боеприпасы
         self.__fuel = 1000
@@ -38,7 +40,7 @@ class Tank:
             self.__y = 0
 
         self.__create()
-        self.right()
+        #self.right()
 
     def fire(self):
         if self.__ammo > 0:
@@ -75,9 +77,10 @@ class Tank:
 
     def update(self):
         if self.__fuel > self.__speed:
-            self.__x += self.__vx * self.__speed
-            self.__y += self.__vy * self.__speed
-            self.__fuel -= self.__speed
+            self.__dx = self.__vx * self.__speed
+            self.__dy = self.__vy * self.__speed
+            self.__x += self.__dx
+            self.__y += self.__dy
             self.__update_hitbox()
             self.__repaint()
 
@@ -89,6 +92,13 @@ class Tank:
 
     def __update_hitbox(self): # метод движения хитбокса
         self.__hitbox.moveto(self.__x, self.__y)
+
+    #def undo_move(self):
+        #self.__x -= self.__dx
+        #self.__y -= self.__dy
+        #self.__fuel += self.__speed
+        #self.__update_hitbox()
+        #self.__repaint()
 
     def intersects(self, other_tank):
         return self.__hitbox.intersects(other_tank.__hitbox)
